@@ -2,18 +2,23 @@ package ar.com.codoacodo.buscador;
 
 public class Buscador {
 	//atributos
-	String claveBusqueda;
-	int cantidad;
-	Articulo[] resultados;
+	private String claveBusqueda;
+	private int cantidad;
+	private Articulo[] resultados;
+	
+	//constructor
+	public Buscador() {
+		
+	}
 	
 	//metodos
-	void buscar() {
+	public void buscar() {
 		//Crear dos articulos y ponerlos dentro del array resultados.
 		//Creo el array.
 		resultados = new Articulo[2];
 		//Creo el primer resultado Articulo.
-		Articulo res1 = new Articulo();
-		Articulo res2 = new Articulo();
+		Articulo res1 = new Articulo("http://sitio.com.ar/img/1.jpg",claveBusqueda,"autor 1",2450);
+		Articulo res2 = new Articulo("http://sitio.com.ar/img/2.jpg",claveBusqueda,"autor 2",1850);
 		//Cargar en cada posicion un articulo.
 		resultados[0] = res1;
 		resultados[1] = res2;
@@ -22,15 +27,15 @@ public class Buscador {
 		cantidad = resultados.length;
 	}
 	
-	void setClaveBusqueda(String claveQueVieneDeAfuera) {
+	public void setClaveBusqueda(String claveQueVieneDeAfuera) {
 		claveBusqueda = claveQueVieneDeAfuera;
 	}
 	
-	Articulo[] getResultados() {
+	public Articulo[] getResultados() {
 		return resultados;
 	}
 	
-	int getTotal() {
+	public int getTotal() {
 		return cantidad;
 	}
 }
