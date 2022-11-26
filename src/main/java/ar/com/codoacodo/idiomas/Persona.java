@@ -1,19 +1,31 @@
 package ar.com.codoacodo.idiomas;
 
-public class Persona {
+public class Persona implements IHablar {
 	
 	//Atributos
 	private String nombre;
-	private String idioma;
+	private IIdioma idioma;
+	private IIdioma[] otrosIdiomas;
 	
 	//Constructor
-	public Persona(String nombre, String idioma ) {
+	public Persona(String nombre, IIdioma idioma ) {
 		this.nombre = nombre;
 		this.idioma = idioma;
+		this.otrosIdiomas = new IIdioma[0];
+	}
+	
+	//ctrl+space
+	@Override
+	public void hablar() {
+		System.out.println(this.nombre + " sabe hablar: ");
+		System.out.println(this.idioma);
+		for(IIdioma idioma: this.otrosIdiomas) {
+			System.out.println(idioma);
+		}
 	}
 	
 	//Metodos
-	public void decir(String palabra, String idioma) {
+	public void decir(String palabra, IIdioma idioma) {
 		
 		if(this.idioma == idioma) {
 			System.out.println(this.nombre + " dice: " + palabra);
@@ -21,5 +33,56 @@ public class Persona {
 			System.out.println(this.nombre + " no sabe decir " + palabra + " en " + idioma);
 		}		
 	}
+	
+	public void aprender(IIdioma idioma ) {
+		
+		if(!this.idioma.equals(idioma)) {//f6//f7
+			
+			//Ver si existe en el array de otrosIdiomas.
+			//alt+shift+m
+			if(hablaEsteIdioma(idioma)) {//f6
+				System.out.println(this.nombre + " ya habla " + idioma);
+			}else {
+				System.out.println(this.nombre + " aprende "+ idioma);
+				
+				this.otrosIdiomas = copiarIdiomas(idioma);
+			}
+		}else {
+			System.out.println(this.nombre + " ya habla " + idioma);
+		}
+	}
+
+	private IIdioma[] copiarIdiomas(IIdioma idioma) {
+		//Agregarlo a la lista.
+		IIdioma [] aux = new IIdioma[this.otrosIdiomas.length + 1];
+		for(int i=0;i < this.otrosIdiomas.length;i++) {
+			aux[i] = this.otrosIdiomas[i];
+		}
+		//Al final del nuevo array aux, agrego  el idioma que aprende.
+		aux[aux.length - 1] = idioma;
+		return aux;
+	}
+
+	private boolean hablaEsteIdioma(IIdioma idioma) {
+		boolean existe = false;
+		for(int i=0;!existe && i<this.otrosIdiomas.length;i++) {
+			existe = this.otrosIdiomas[i].equals(idioma);//true or false
+		}
+		return existe;
+	}
+
+	public void decirAlgoEnTodosLosIdiomas(String algo) {
+		//Dice algo seguro en el idioma nativo.
+		this.idioma.decir(algo);
+		
+		//Si ademas sabe hablar otros idiomas.
+		/*for(int i=0; i<this.otrosIdiomas.length; i++) {
+			this.otrosIdiomas[i].decir(algo);
+		}*/
+		for(IIdioma aux : this.otrosIdiomas) {
+			aux.decir(algo);
+		}
+	}
 }
+		
 
