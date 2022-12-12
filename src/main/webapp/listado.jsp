@@ -1,14 +1,76 @@
 <!Doctype html>
+<!--Directivas para importar clases-->
+<%@page import="ar.com.codoacodo.domain.Producto"%>
+<%@page import="java.util.List"%>
+
 <html lang="es">
 	<head>
-		<!--Bootstrap-->
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<jsp:include page="styles.jsp"/>
 	</head>
 		<!--Codigo html para mostrar la tabla que viene desde el controller-->
 	<body>
-		<main>
+		<!--Aca va el navbar.jsp-->
+		<jsp:include page="navbar.jsp"/>
+		<main class="container">
 			<h1>Listado de Producto</h1>
-			<h2>Sub titulo</h2>
+			<section>
+				<table class="table">
+				  <thead>
+				    <tr>
+				      <th scope="col">#</th>
+				      <th scope="col">C&oacute;digo</th>
+				      <th scope="col">T&iacute;tulo</th>
+				      <th scope="col">Precio</th>
+				      <th scope="col">Fecha Alta</th>
+				      <th scope="col">Autor</th>
+				      <th scope="col">Imagen</th>
+				      <th scope="col">&nbsp;</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				  <% //scriplet
+				  	//Codigo java
+				  	//En la jsp existe un objeto llamado request que esta implicito.
+				  	//Capturar la lista que guardamos en el controller.
+				  	List<Producto> listado = (List<Producto>)request.getAttribute("productos");
+				  	for(Producto p : listado){
+				  %>
+				    <tr>
+				      <th scope="row"><%=p.getId()%></th>
+				      <td><%=p.getCodigo()%></td>
+				      <td><%=p.getTitulo()%></td>
+				      <td><%=p.getPrecio()%></td>
+				      <td><%=p.getFechaAlta()%></td>
+				      <td><%=p.getAutor()%></td>
+				      <td><%=p.getImg()%></td>
+				      <td>Editar | Eliminar</td>
+				    </tr>
+				  <%
+				  	}
+				  %>
+				  </tbody>
+				</table>
+			</section>
 		</main>
+		<jsp:include page="scripts.jsp"/>
 	</body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

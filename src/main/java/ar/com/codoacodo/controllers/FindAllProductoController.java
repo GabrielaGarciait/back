@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,6 +15,9 @@ import ar.com.codoacodo.dao.impl.ProductoDAOMysqlImpl;
 import ar.com.codoacodo.domain.Producto;
 
 //Una clase que extiendo de httpServlet.
+//GET > http://localhost:8080/app-web/FindAllProductoController
+
+@WebServlet ("/FindAllProductoController")
 public class FindAllProductoController extends HttpServlet{
 
 	//Tienen dos metodos:
@@ -40,7 +44,7 @@ public class FindAllProductoController extends HttpServlet{
 		req.setAttribute("productos", productos);
 		
 		//Este bloque de codigo lo vamos a usar en todos lados.
-		getServletContext().getRequestDispatcher("listado.jsp").forward(req, resp);
+		getServletContext().getRequestDispatcher("/listado.jsp").forward(req, resp);
 	}
 
 }
