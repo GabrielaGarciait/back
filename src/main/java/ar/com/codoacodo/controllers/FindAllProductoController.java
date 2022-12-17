@@ -44,7 +44,12 @@ public class FindAllProductoController extends HttpServlet{
 		req.setAttribute("productos", productos);
 		
 		//Este bloque de codigo lo vamos a usar en todos lados.
-		getServletContext().getRequestDispatcher("/listado.jsp").forward(req, resp);
+		getServletContext().getRequestDispatcher("/listado.jsp").forward(req, resp);		
+	}
+	
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doGet(req, resp);
 	}
 
 }

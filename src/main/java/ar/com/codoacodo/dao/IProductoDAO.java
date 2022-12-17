@@ -25,4 +25,6 @@ public interface IProductoDAO {
 	public void create(Producto newProduct) throws Exception;
 	//insert into producto (campo1 ... campoN)
 	//values (newProduct.campo1, ... newProduct,campoN)
+
+	public List<Producto> search(String clave) throws Exception;
 }

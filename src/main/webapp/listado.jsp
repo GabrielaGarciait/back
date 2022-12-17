@@ -12,7 +12,8 @@
 		<!--Aca va el navbar.jsp-->
 		<jsp:include page="navbar.jsp"/>
 		<main class="container">
-			<h1>Listado de Producto</h1>
+			<h1>Listado de Libros</h1>
+			<jsp:include page="mensajeria.jsp"/>
 			<section>
 				<table class="table">
 				  <thead>
@@ -43,7 +44,17 @@
 				      <td><%=p.getFechaAlta()%></td>
 				      <td><%=p.getAutor()%></td>
 				      <td><%=p.getImg()%></td>
-				      <td>Editar | Eliminar</td>
+				      <td>
+				      <a class="btn btn-primary" role="button" href="<%=request.getContextPath()%>/EditarProductoController?id=<%=p.getId()%>">Editar</a> 
+				      <!-- Button trigger modal -->
+						<button type="button" 
+								class="btn btn-danger" 
+								data-bs-toggle="modal" 
+								data-bs-target="#exampleModal"
+								onclick="setProductoId(<%=p.getId()%>)">
+						  	Eliminar
+						</button>
+					</td>
 				    </tr>
 				  <%
 				  	}
@@ -52,7 +63,33 @@
 				</table>
 			</section>
 		</main>
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		    	<form action="<%=request.getContextPath()%>/DeleteProductoController">
+		    	  <input type="hidden" name="idProducto" id="idProducto">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">Eliminar Libro</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body">
+			        ¿Confirma que desea eliminar?
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+			        <button type="submit" class="btn btn-primary">Eliminar</button>
+			      </div>
+			     </form>
+		    </div>
+		  </div>
+		</div>
 		<jsp:include page="scripts.jsp"/>
+		<script>
+			function setProductoId(id) {
+				document.getElementById('idProducto').value=id;
+			}
+		</script>
 	</body>
 </html>
 

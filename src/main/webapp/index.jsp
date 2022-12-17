@@ -12,9 +12,7 @@
 	<body>
 		<!--Aca va el navbar.jsp-->
 		<jsp:include page="navbar.jsp"/>
-		<button onclick="verListado()">
-			Ver Listado de producto
-		</button>
 		<jsp:include page="scripts.jsp"/>
+		<jsp:include page="img.jsp"/>
 	</body>
 </html>
